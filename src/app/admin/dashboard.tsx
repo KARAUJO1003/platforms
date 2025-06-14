@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useActionState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Trash2, Loader2 } from 'lucide-react';
-import Link from 'next/link';
-import { deleteSubdomainAction } from '@/app/actions';
-import { rootDomain, protocol } from '@/lib/utils';
+import { useActionState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Trash2, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { deleteSubdomainAction } from "@/app/actions";
+import { rootDomain, protocol } from "@/lib/utils";
 
 type Tenant = {
   subdomain: string;
@@ -40,7 +40,7 @@ function DashboardHeader() {
 function TenantGrid({
   tenants,
   action,
-  isPending
+  isPending,
 }: {
   tenants: Tenant[];
   action: (formData: FormData) => void;
@@ -118,7 +118,11 @@ export function AdminDashboard({ tenants }: { tenants: Tenant[] }) {
   return (
     <div className="space-y-6 relative p-4 md:p-8">
       <DashboardHeader />
-      <TenantGrid tenants={tenants} action={action} isPending={isPending} />
+      <TenantGrid
+        tenants={tenants}
+        action={action}
+        isPending={isPending}
+      />
 
       {state.error && (
         <div className="fixed bottom-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded shadow-md">

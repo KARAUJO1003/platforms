@@ -1,27 +1,25 @@
-'use client';
+"use client";
 
-import type React from 'react';
-
-import { useState } from 'react';
-import { useActionState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useState } from "react";
+import { useActionState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
-} from '@/components/ui/popover';
-import { Smile } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Smile } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import {
   EmojiPicker,
   EmojiPickerContent,
   EmojiPickerSearch,
-  EmojiPickerFooter
-} from '@/components/ui/emoji-picker';
-import { createSubdomainAction } from '@/app/actions';
-import { rootDomain } from '@/lib/utils';
+  EmojiPickerFooter,
+} from "@/components/ui/emoji-picker";
+import { createSubdomainAction } from "@/app/actions";
+import { rootDomain } from "@/lib/utils";
 
 type CreateState = {
   error?: string;
@@ -56,7 +54,7 @@ function SubdomainInput({ defaultValue }: { defaultValue?: string }) {
 function IconPicker({
   icon,
   setIcon,
-  defaultValue
+  defaultValue,
 }: {
   icon: string;
   setIcon: (icon: string) => void;
@@ -73,7 +71,12 @@ function IconPicker({
     <div className="space-y-2">
       <Label htmlFor="icon">Icon</Label>
       <div className="flex flex-col gap-2">
-        <input type="hidden" name="icon" value={icon} required />
+        <input
+          type="hidden"
+          name="icon"
+          value={icon}
+          required
+        />
         <div className="flex items-center gap-2">
           <Card className="flex-1 flex flex-row items-center justify-between p-2 border border-input rounded-md">
             <div className="min-w-[40px] min-h-[40px] flex items-center pl-[14px] select-none">
@@ -85,7 +88,10 @@ function IconPicker({
                 </span>
               )}
             </div>
-            <Popover open={isPickerOpen} onOpenChange={setIsPickerOpen}>
+            <Popover
+              open={isPickerOpen}
+              onOpenChange={setIsPickerOpen}
+            >
               <PopoverTrigger asChild>
                 <Button
                   type="button"
@@ -125,7 +131,7 @@ function IconPicker({
 }
 
 export function SubdomainForm() {
-  const [icon, setIcon] = useState('');
+  const [icon, setIcon] = useState("");
 
   const [state, action, isPending] = useActionState<CreateState, FormData>(
     createSubdomainAction,
@@ -133,17 +139,28 @@ export function SubdomainForm() {
   );
 
   return (
-    <form action={action} className="space-y-4">
+    <form
+      action={action}
+      className="space-y-4"
+    >
       <SubdomainInput defaultValue={state?.subdomain} />
 
-      <IconPicker icon={icon} setIcon={setIcon} defaultValue={state?.icon} />
+      <IconPicker
+        icon={icon}
+        setIcon={setIcon}
+        defaultValue={state?.icon}
+      />
 
       {state?.error && (
         <div className="text-sm text-red-500">{state.error}</div>
       )}
 
-      <Button type="submit" className="w-full" disabled={isPending || !icon}>
-        {isPending ? 'Creating...' : 'Create Subdomain'}
+      <Button
+        type="submit"
+        className="w-full"
+        disabled={isPending || !icon}
+      >
+        {isPending ? "Creating..." : "Create Subdomain"}
       </Button>
     </form>
   );
