@@ -57,7 +57,7 @@ export function NavMain({
                 <SidebarMenuButton
                   disabled={item.disabled}
                   className={cn(
-                    "data-[state=open]:dark:bg-sidebar-accent data-[state=open]:bg-muted data-[state=open]:border data-[state=open]:text-sidebar-accent-foreground"
+                    "data-[state=open]:dark:bg-sidebar-accent rounded-sm data-[state=open]:bg-muted data-[state=open]:border data-[state=open]:text-sidebar-accent-foreground"
                   )}
                   tooltip={item.title}
                   onClick={() => {
@@ -74,7 +74,7 @@ export function NavMain({
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
-                <SidebarMenuSub className="px-0">
+                <SidebarMenuSub className="px-0 ">
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton
@@ -82,7 +82,7 @@ export function NavMain({
                         className={cn(
                           " rounded-none text-muted-foreground border-l-2 hover:border-muted-foreground",
                           {
-                            "border-l-2 border-primary text-foreground":
+                            "border-l-2 border-muted-foreground dark:bg-muted bg-muted-foreground/10 shadow-inner text-foreground  ":
                               pathname === subItem.url,
                           }
                         )}

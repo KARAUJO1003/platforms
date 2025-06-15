@@ -35,7 +35,7 @@ const data = {
     {
       // name: `Loja ${getClientSubdomain()}`,
       name: `Loja A&A Soluções`,
-      logo: "https://github.com/KARAUJO1003.png",
+      logo: "https://logoipsum.com/artwork/317",
       plan: "Organização ",
       path: "https://avbn2.ferroeste.com.br",
     },
