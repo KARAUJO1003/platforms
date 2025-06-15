@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function LoginForm({
+export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -17,7 +17,7 @@ export function LoginForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Lógica de autenticação aqui
-    alert("Login enviado!");
+    alert("Register enviado!");
   };
 
   return (
@@ -37,14 +37,14 @@ export function LoginForm({
               </div>
               <span className="sr-only">A&A Soluções</span>
             </a>
-            <h1 className="text-xl font-bold">Bem vindo à A&A Soluções</h1>
+            <h1 className="text-xl font-bold">Faça seu cadastro</h1>
             <div className="text-center text-sm">
-              Ainda não possui uma conta?{" "}
+              Já tem uma conta?{" "}
               <a
-                href="/cadastro"
+                href="/login"
                 className="underline underline-offset-4"
               >
-                Cadastre-se
+                Faça login
               </a>
             </div>
           </div>
@@ -71,11 +71,22 @@ export function LoginForm({
                 onChange={(e) => setSenha(e.target.value)}
               />
             </div>
+            <div className="grid gap-3">
+              <Label htmlFor="confirmar-senha">Confirmar Senha</Label>
+              <Input
+                id="confirmar-senha"
+                type="password"
+                placeholder="Confirme sua senha"
+                required
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+              />
+            </div>
             <Button
               type="submit"
               className="w-full"
             >
-              Entrar
+              Cadastrar
             </Button>
           </div>
           {/* <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
@@ -120,9 +131,8 @@ export function LoginForm({
         </div>
       </form>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        Ao clicar em continuar, você concorda com nossos{" "}
-        <a href="#">Termos de Serviço</a> e{" "}
-        <a href="#">Política de Privacidade</a>.
+        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
+        and <a href="#">Privacy Policy</a>.
       </div>
     </div>
   );
