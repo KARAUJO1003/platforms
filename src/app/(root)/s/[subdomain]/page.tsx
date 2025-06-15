@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getSubdomainData } from "@/lib/subdomains";
 import { protocol, rootDomain } from "@/lib/utils";
 import { StatsGrid } from "./components/stats-grid";
+import { Button } from "@/components/ui/button";
 
 export async function generateMetadata({
   params,
@@ -38,7 +39,7 @@ export default async function SubdomainPage({
   }
 
   return (
-    <div className="flex min-h-screen flex-col p-4">
+    <div className="flex min-h-screen gap-8 flex-col p-4">
       <div className="absolute top-4 right-4">
         <Link
           href={`${protocol}://${rootDomain}`}
@@ -46,6 +47,16 @@ export default async function SubdomainPage({
         >
           {rootDomain}
         </Link>
+      </div>
+      <div className="flex items-center justify-between gap-4">
+        <div className="prose-sm prose-invert">
+          <h1 className="font-semibold">Olá, usuário!</h1>
+          <p className="text-muted-foreground">
+            Aqui está uma visão geral dos seus contatos. Gerencie ou crie novos
+            com facilidade!
+          </p>
+        </div>
+        <Button className="px-3">Adicionar Contato</Button>
       </div>
 
       <StatsGrid

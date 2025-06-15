@@ -57,7 +57,7 @@ export function NavMain({
                 <SidebarMenuButton
                   disabled={item.disabled}
                   className={cn(
-                    "data-[state=open]:dark:bg-sidebar-accent data-[state=open]:bg-muted-foreground/20 data-[state=open]:text-sidebar-accent-foreground"
+                    "data-[state=open]:dark:bg-sidebar-accent data-[state=open]:bg-muted data-[state=open]:border data-[state=open]:text-sidebar-accent-foreground"
                   )}
                   tooltip={item.title}
                   onClick={() => {
@@ -79,10 +79,13 @@ export function NavMain({
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton
                         href={subItem.url}
-                        className={cn("w-[105%]", {
-                          "border-l-4 text-foreground border-primary  bg-muted-foreground/10 rounded-l-none":
-                            pathname === subItem.url,
-                        })}
+                        className={cn(
+                          " rounded-none text-muted-foreground border-l-2 hover:border-muted-foreground",
+                          {
+                            "border-l-2 border-primary text-foreground":
+                              pathname === subItem.url,
+                          }
+                        )}
                         asChild
                       >
                         <a href={subItem.url}>

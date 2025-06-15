@@ -61,15 +61,15 @@ const data = {
       items: [
         {
           title: "Ultimas vendas",
-          url: "/analises/vendas",
+          url: "/s/aiasolucoes/pdv",
         },
         {
           title: "PDV - Ponto de Venda",
-          url: "/analises/vendas-produto",
+          url: "/pdv",
         },
         {
           title: "Perceiros de vendas",
-          url: "/analises/vendas-cliente",
+          url: "/pdv",
         },
       ],
     },
@@ -255,7 +255,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar
-      collapsible="icon"
+      collapsible="offcanvas"
       variant="sidebar"
       className="bg-muted"
       {...props}

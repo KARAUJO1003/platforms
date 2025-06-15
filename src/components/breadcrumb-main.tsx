@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { HomeIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
@@ -50,7 +51,7 @@ export function BreadcrumbMain({ className }: { className?: string }) {
                   className="capitalize cursor-pointer"
                   onClick={() => nextRouter("inicio")}
                 >
-                  Inicio
+                  <HomeIcon className="size-4" />
                 </BreadcrumbLink>
               </BreadcrumbItem>
             )}

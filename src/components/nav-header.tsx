@@ -5,7 +5,7 @@ import { LogoutButton } from "./auth/logout-btn";
 
 export const NavHeader = () => {
   return (
-    <header className="top-0 z-20 sticky flex items-center gap-2 backdrop-blur-sm px-4 h-[var(--header-size)] shrink-0">
+    <header className="top-0 z-20 border-b  sticky flex items-center gap-2 backdrop-blur-sm px-4 h-[var(--header-size)] shrink-0">
       <SidebarTrigger className="-ml-1" />
       <BreadcrumbMain className="mr-auto ml-3" />
       {/* <NotificationsButton /> */}
