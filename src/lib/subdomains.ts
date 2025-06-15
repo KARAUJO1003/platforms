@@ -1,4 +1,6 @@
-import { redis } from '@/lib/redis';
+import { redis } from "@/lib/redis";
+import { rootDomain } from "./utils";
+import { NextRequest } from "next/server";
 
 export function isValidIcon(str: string) {
   if (str.length > 10) {
@@ -16,7 +18,7 @@ export function isValidIcon(str: string) {
     // If the regex fails (e.g., in environments that don't support Unicode property escapes),
     // fall back to a simpler validation
     console.warn(
-      'Emoji regex validation failed, using fallback validation',
+      "Emoji regex validation failed, using fallback validation",
       error
     );
   }
@@ -32,7 +34,7 @@ type SubdomainData = {
 };
 
 export async function getSubdomainData(subdomain: string) {
-  const sanitizedSubdomain = subdomain.toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const sanitizedSubdomain = subdomain.toLowerCase().replace(/[^a-z0-9-]/g, "");
   const data = await redis.get<SubdomainData>(
     `subdomain:${sanitizedSubdomain}`
   );
@@ -40,7 +42,7 @@ export async function getSubdomainData(subdomain: string) {
 }
 
 export async function getAllSubdomains() {
-  const keys = await redis.keys('subdomain:*');
+  const keys = await redis.keys("subdomain:*");
 
   if (!keys.length) {
     return [];
@@ -49,13 +51,58 @@ export async function getAllSubdomains() {
   const values = await redis.mget<SubdomainData[]>(...keys);
 
   return keys.map((key, index) => {
-    const subdomain = key.replace('subdomain:', '');
+    const subdomain = key.replace("subdomain:", "");
     const data = values[index];
 
     return {
       subdomain,
-      emoji: data?.emoji || '❓',
-      createdAt: data?.createdAt || Date.now()
+      emoji: data?.emoji || "❓",
+      createdAt: data?.createdAt || Date.now(),
     };
   });
+}
+
+export function getClientSubdomain() {
+  const host = typeof window !== "undefined" ? window.location.hostname : "";
+  const subdomain = host.split(".")[0];
+  return subdomain;
+}
+
+export function extractSubdomain(request: NextRequest): string | null {
+  const url = request.url;
+  const host = request.headers.get("host") || "";
+  const hostname = host.split(":")[0];
+
+  // Local development environment
+  if (url.includes("localhost") || url.includes("127.0.0.1")) {
+    // Try to extract subdomain from the full URL
+    const fullUrlMatch = url.match(/http:\/\/([^.]+)\.localhost/);
+    if (fullUrlMatch && fullUrlMatch[1]) {
+      return fullUrlMatch[1];
+    }
+
+    // Fallback to host header approach
+    if (hostname.includes(".localhost")) {
+      return hostname.split(".")[0];
+    }
+
+    return null;
+  }
+
+  // Production environment
+  const rootDomainFormatted = rootDomain.split(":")[0];
+
+  // Handle preview deployment URLs (tenant---branch-name.vercel.app)
+  if (hostname.includes("---") && hostname.endsWith(".vercel.app")) {
+    const parts = hostname.split("---");
+    return parts.length > 0 ? parts[0] : null;
+  }
+
+  // Regular subdomain detection
+  const isSubdomain =
+    hostname !== rootDomainFormatted &&
+    hostname !== `www.${rootDomainFormatted}` &&
+    hostname.endsWith(`.${rootDomainFormatted}`);
+
+  return isSubdomain ? hostname.replace(`.${rootDomainFormatted}`, "") : null;
 }
