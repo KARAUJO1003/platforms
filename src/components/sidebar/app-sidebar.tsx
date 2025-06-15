@@ -24,7 +24,6 @@ import { NavUser } from "./nav-user";
 import { TeamSwitcher } from "./team-switcher";
 import { NavProjects } from "./nav-projects";
 import { useAuthUser } from "@/contexts/auth-context";
-import { getClientSubdomain } from "@/lib/subdomains";
 
 const data = {
   user: {
@@ -34,7 +33,8 @@ const data = {
   },
   teams: [
     {
-      name: `Loja ${getClientSubdomain()}`,
+      // name: `Loja ${getClientSubdomain()}`,
+      name: `Loja A&A Soluções`,
       logo: "https://github.com/KARAUJO1003.png",
       plan: "Organização ",
       path: "https://avbn2.ferroeste.com.br",
@@ -54,27 +54,27 @@ const data = {
   ],
   navMain: [
     {
-      title: "Análises e Ajustes",
+      title: "Vendas",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "Formação de Leito",
-          url: "/formacaoleito",
+          title: "Ultimas vendas",
+          url: "/analises/vendas",
         },
         {
-          title: "Tracking",
-          url: "/tracking",
+          title: "PDV - Ponto de Venda",
+          url: "/analises/vendas-produto",
         },
         {
-          title: "Análises Químicas",
-          url: "/analises",
+          title: "Perceiros de vendas",
+          url: "/analises/vendas-cliente",
         },
       ],
     },
     {
-      title: "Automações",
+      title: "Relatórios",
       url: "#",
       icon: Bot,
       items: [
@@ -93,9 +93,55 @@ const data = {
       ],
     },
     {
-      title: "Documentação",
+      title: "Lançamentos",
       url: "#",
       icon: BookOpen,
+      items: [
+        {
+          title: "Introduction",
+          url: "#",
+        },
+        {
+          title: "Get Started",
+          url: "#",
+        },
+        {
+          title: "Tutorials",
+          url: "#",
+        },
+        {
+          title: "Changelog",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Estoque",
+      url: "#",
+      icon: BookOpen,
+      items: [
+        {
+          title: "Introduction",
+          url: "#",
+        },
+        {
+          title: "Get Started",
+          url: "#",
+        },
+        {
+          title: "Tutorials",
+          url: "#",
+        },
+        {
+          title: "Changelog",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Análises",
+      url: "#",
+      icon: Frame,
       items: [
         {
           title: "Introduction",
@@ -141,12 +187,12 @@ const data = {
   ],
   projects: [
     {
-      name: "SIG AVB - Sistema de Gestão a Vista",
+      name: "Loja A&A Soluções",
       url: "https://avb.ferroeste.com.br",
       icon: PieChart,
     },
     {
-      name: "Projeto Pirolise",
+      name: "Outras soluções",
       url: "https://biocarbono.ferroeste.com.br",
       icon: Frame,
     },

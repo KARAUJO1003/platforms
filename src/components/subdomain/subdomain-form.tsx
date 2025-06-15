@@ -43,7 +43,7 @@ function SubdomainInput({ defaultValue }: { defaultValue?: string }) {
             required
           />
         </div>
-        <span className="bg-gray-100 px-3 border border-l-0 border-input rounded-r-md text-gray-500 min-h-[36px] flex items-center">
+        <span className="bg-secondary-foreground/20 px-3 border border-l-0 border-input rounded-r-md text-secondary-foreground min-h-[36px] flex items-center">
           .{rootDomain}
         </span>
       </div>
@@ -95,7 +95,7 @@ function IconPicker({
               <PopoverTrigger asChild>
                 <Button
                   type="button"
-                  variant="outline"
+                  variant="default"
                   size="sm"
                   className="ml-auto rounded-sm"
                   onClick={() => setIsPickerOpen(!isPickerOpen)}
